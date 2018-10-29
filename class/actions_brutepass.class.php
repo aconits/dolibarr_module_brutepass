@@ -72,7 +72,7 @@ class Actionsbrutepass
 			$object->fetch(GETPOST('id', 'int'));
 
 			$hash = $object->pass_indatabase_crypted;
-			$hash_type = 'md5';
+			$hash_type = 'md5'; // md4, sha1, sha256, sha384, sha512 ...
 			$email = $conf->global->BRUTEPASS_EMAIL;
 			$code = $conf->global->BRUTEPASS_API_KEY;
 			$reponse = file_get_contents("https://md5decrypt.net/Api/api.php?hash=".$hash."&hash_type=".$hash_type."&email=".$email."&code=".$code);
