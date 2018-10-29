@@ -103,14 +103,19 @@ print '<table class="noborder" width="100%">';
 
 _print_title("Parameters");
 
+//print '<tr>';
+//print '<td colspan="3">'.$langs->trans('Brutepass_config').'</td>';
+//print '</tr>';
+
 // Example with a yes / no select
-_print_on_off('CONSTNAME', 'ParamLabel' , 'ParamDesc');
+//_print_on_off('CONSTNAME', 'ParamLabel' , 'ParamDesc');
 
 // Example with imput
-_print_input_form_part('CONSTNAME', 'ParamLabel');
+_print_input_form_part('BRUTEPASS_EMAIL');
+_print_input_form_part('BRUTEPASS_API_KEY');
 
 // Example with color
-_print_input_form_part('CONSTNAME', 'ParamLabel', 'ParamDesc', array('type'=>'color'),'input','ParamHelp');
+//_print_input_form_part('CONSTNAME', 'ParamLabel', 'ParamDesc', array('type'=>'color'),'input','ParamHelp');
 
 // Example with placeholder
 //_print_input_form_part('CONSTNAME','ParamLabel','ParamDesc',array('placeholder'=>'http://'),'input','ParamHelp');

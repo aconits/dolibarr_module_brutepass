@@ -12,3 +12,21 @@ brutepass=brutepass
 ParamLabel=Nom du paramètre
 ParamDesc=Une description si besoin
 ParamHelp=Le contenu de l'aide
+
+Brutepass_try=Tester le hash de votre mot de passe
+
+BRUTEPASS_EMAIL=Email utilisé pour l'API<br /><small>Depuis : https://md5decrypt.net/Api/</small>
+BRUTEPASS_API_KEY=Clé API (code)
+
+CODE_ERREUR_001=Vous avez dépassé les 400 requêtes autorisées (contactez moi pour des besoins supérieurs).
+CODE_ERREUR_002=Il y a une erreur dans votre couple email / code.
+CODE_ERREUR_003=Votre requête comporte plus de 400 hashs.
+CODE_ERREUR_004=Le type de hash dans la variable $hash_type n'est pas bon. Cette variable est à mettre en minuscule.
+CODE_ERREUR_005=Le hash fourni ne correspond pas au type de hash donné.
+CODE_ERREUR_006=Il manque un argument à votre requête, ou vous avez mal écrit l'un d'entre eux.
+CODE_ERREUR_007=Le code premium fourni ne correspond pas à un compte valide ou actif.
+CODE_ERREUR_008=La variable premium n'est pas correcte, elle doit être égale à 1.
+CODE_ERREUR_009=Votre compte premium est arrivé à terme, pour continuer à utiliser votre compte premium, il vous faut racheter du temps.
+
+Brutepass_pwd_not_secure=L'encryption de votre mot de passe est connue
+Brutepass_pwd_ok=L'encryption de votre mot de passe est inconnue

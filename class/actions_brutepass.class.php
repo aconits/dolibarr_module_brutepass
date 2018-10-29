@@ -62,28 +62,42 @@ class Actionsbrutepass
 	 */
 	function doActions($parameters, &$object, &$action, $hookmanager)
 	{
-		$error = 0; // Error counter
-		$myvalue = 'test'; // A result value
+		global $langs,$conf;
 
-		print_r($parameters);
-		echo "action: " . $action;
-		print_r($object);
-
-		if (in_array('somecontext', explode(':', $parameters['context'])))
+		$TContext = explode(':', $parameters['context']);
+		if ($action == 'brutepass' && in_array('usercard', $TContext) && GETPOST('id', 'int'))
 		{
-		  // do something only for the context 'somecontext'
+			$langs->load('brutepass@brutepass');
+
+			$object->fetch(GETPOST('id', 'int'));
+
+			$hash = $object->pass_indatabase_crypted;
+			$hash_type = 'md5';
+			$email = $conf->global->BRUTEPASS_EMAIL;
+			$code = $conf->global->BRUTEPASS_API_KEY;
+			$reponse = file_get_contents("https://md5decrypt.net/Api/api.php?hash=".$hash."&hash_type=".$hash_type."&email=".$email."&code=".$code);
+
+			if (substr($reponse, 0, 11) === 'CODE ERREUR') setEventMessage($langs->trans(strtr($reponse, array(' : ' => '_', ' ' => '_'))), 'errors');
+			else if (!empty($reponse)) setEventMessage($langs->trans('Brutepass_pwd_not_secure'), 'warnings');
+			else setEventMessage($langs->trans('Brutepass_pwd_ok'));
+
 		}
 
-		if (! $error)
-		{
-			$this->results = array('myreturn' => $myvalue);
-			$this->resprints = 'A text to show';
-			return 0; // or return 1 to replace standard code
-		}
-		else
-		{
-			$this->errors[] = 'Error message';
-			return -1;
-		}
+		return 0;
 	}
+
+	function addMoreActionsButtons($parameters, &$object, &$action, $hookmanager)
+	{
+		global $langs;
+
+		$TContext = explode(':', $parameters['context']);
+		if (in_array('usercard', $TContext))
+		{
+			$langs->load('brutepass@brutepass');
+			print '<div class="inline-block divButAction"><a class="butAction" href="'.$_SERVER['PHP_SELF'].'?id='.$object->id.'&action=brutepass">'.$langs->trans('Brutepass_try').'</a></div>';
+		}
+
+		return 0;
+	}
+
 }
